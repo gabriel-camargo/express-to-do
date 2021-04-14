@@ -1,0 +1,20 @@
+{
+  "name": "express-to-do",
+  "version": "1.0.0",
+  "description": "A To Do app made with TypeORM and MongoDB",
+  "main": "src/index.ts",
+  "repository": "https://github.com/gabriel-camargo/express-to-do",
+  "author": "Gabriel R. Camargo",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.4.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.37"
+  }
+}
