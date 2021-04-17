@@ -1,7 +1,10 @@
+import 'reflect-metadata'
 import express, { Application, json } from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import { config } from 'dotenv'
+import { router } from './routes'
+import createConnection from './database/index'
 
 class App {
     public app: Application
@@ -11,6 +14,7 @@ class App {
     private isDev: boolean
 
     constructor() {
+        createConnection()
         config()
 
         this.app = express()
@@ -23,6 +27,7 @@ class App {
     }
 
     private middlewares(): void {
+        this.app.use(router)
         this.app.use(helmet())
         this.app.use(cors())
         this.app.use(json())
