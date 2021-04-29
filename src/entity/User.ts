@@ -1,4 +1,7 @@
-import { Entity, ObjectIdColumn, Column, ObjectID } from 'typeorm'
+import { Entity, ObjectIdColumn, Column, ObjectID, BeforeInsert } from 'typeorm'
+import * as bcrypt from 'bcryptjs'
+
+const BCRYPT_HASH_ROUND = 8
 
 @Entity('users')
 class User {
@@ -16,6 +19,11 @@ class User {
 
     @Column()
     password: string
+
+    @BeforeInsert()
+    async beforeInsert(): Promise<void> {
+        this.password = await bcrypt.hash(this.password, BCRYPT_HASH_ROUND)
+    }
 }
 
 export { User }
