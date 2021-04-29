@@ -27,10 +27,10 @@ class App {
     }
 
     private middlewares(): void {
-        this.app.use(router)
         this.app.use(helmet())
         this.app.use(cors())
         this.app.use(json())
+        this.app.use(router)
     }
 }
 

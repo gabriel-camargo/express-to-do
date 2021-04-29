@@ -4,18 +4,15 @@ import { UsersRepository } from '../repositories/UsersRepository'
 
 class UserController {
     async create(req: Request, res: Response): Promise<Response> {
+        const { name, last_name, email, password } = req.body
+
         try {
             const usersRepository = getCustomRepository(UsersRepository)
-            const [name, lastName, email, password] = [
-                'Gabriel',
-                'Camargo',
-                'gabriel2@teste.com',
-                '123',
-            ]
 
             const userAlreadyExists = await usersRepository.findOne({
                 email,
             })
+
             if (userAlreadyExists) {
                 return res
                     .status(400)
@@ -24,7 +21,7 @@ class UserController {
 
             const user = usersRepository.create({
                 name,
-                last_name: lastName,
+                last_name,
                 email,
                 password,
             })
