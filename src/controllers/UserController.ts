@@ -27,14 +27,14 @@ class UserController {
             })
 
             await usersRepository.save(user)
-
-            return res.status(201).json({ message: 'User created' })
         } catch (error) {
             console.log('cacth', error)
             return res.status(400).json({
                 error: error,
             })
         }
+
+        return res.status(201).json({ message: 'User created' })
     }
 }
 
