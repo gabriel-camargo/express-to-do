@@ -74,6 +74,13 @@ class UserController {
 
         return res.status(201).json({ message: 'User created' })
     }
+
+    async dashboard(req: Request, res: Response): Promise<Response> {
+        return res.status(200).send({
+            message: `Boas vindas ${res.locals.user.name}!`,
+            user: res.locals.user,
+        })
+    }
 }
 
 export { UserController }
