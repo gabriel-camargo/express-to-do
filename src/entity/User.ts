@@ -25,6 +25,10 @@ class User {
         const salt = await bcrypt.genSalt(BCRYPT_HASH_ROUND)
         this.password = await bcrypt.hash(this.password, salt)
     }
+
+    checkPassword(unencryptedPassword: string): boolean {
+        return bcrypt.compareSync(unencryptedPassword, this.password)
+    }
 }
 
 export { User }
