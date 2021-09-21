@@ -18,7 +18,7 @@ class UserController {
                 email,
             })
 
-            if (!user.checkPassword(password)) {
+            if (!user || !user.checkPassword(password)) {
                 return res.status(401).send()
             }
 
@@ -77,7 +77,7 @@ class UserController {
 
     async dashboard(req: Request, res: Response): Promise<Response> {
         return res.status(200).send({
-            message: `Boas vindas ${res.locals.user.name}!`,
+            message: `Boas vindas, ${res.locals.user.name.first_name}!`,
             user: res.locals.user,
         })
     }

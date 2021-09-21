@@ -4,7 +4,10 @@ export default {
     useNewUrlParser: true,
     synchronize: true,
     logging: true,
-    useUnifiedTopology: true, // if you add this option the problem will solved
+    useUnifiedTopology: true,
+    writeConcern: {
+        j: true,
+    },
     entities: ['./src/entity/**.ts'],
     cli: {
         entitiesDir: 'src/entity',
