@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { getCustomRepository } from 'typeorm'
-import { UsersRepository } from '../repositories/UsersRepository'
+import { UsersRepository } from '../../repositories/UsersRepository'
 import * as jwt from 'jsonwebtoken'
 
 class UserController {
@@ -22,15 +22,9 @@ class UserController {
                 return res.status(401).send()
             }
 
-            const token = jwt.sign(
-                {
-                    user,
-                },
-                process.env.SECRET ?? '',
-                {
-                    expiresIn: '4h',
-                },
-            )
+            const token = jwt.sign({ user }, process.env.SECRET ?? '', {
+                expiresIn: '4h',
+            })
 
             res.status(200).send({ token })
         } catch (error) {
@@ -46,17 +40,6 @@ class UserController {
 
         try {
             const usersRepository = getCustomRepository(UsersRepository)
-
-            const userAlreadyExists = await usersRepository.findOne({
-                email,
-            })
-
-            if (userAlreadyExists) {
-                return res
-                    .status(400)
-                    .json({ message: 'email already exists!' })
-            }
-
             const user = usersRepository.create({
                 name,
                 last_name,
